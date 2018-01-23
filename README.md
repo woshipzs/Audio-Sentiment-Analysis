@@ -1,3 +1,3 @@
 # Audio-Sentiment-Analysis
 
-These are codes for audio sentiment analysis for call center data.
+Codes for audio sentiment analysis of call center data.
