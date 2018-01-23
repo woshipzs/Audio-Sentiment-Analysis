@@ -5,10 +5,10 @@ import numpy as np
 import os
 import csv
 
-label_path = '../../concatenated.csv'
-seg_dir = '../segmented data/'
-audio_dir = '../../Inside Sales Call MP3s/'
-trans_dir = '../../transcripts/'
+label_path = 'concatenated.csv'
+seg_dir = 'segmented data/'
+audio_dir = 'Inside Sales Call MP3s/'
+trans_dir = 'transcripts/'
 audio_format = 'mp3'
 AudioSegment.converter = "/usr/local/Cellar/ffmpeg/3.4.1/bin/ffmpeg"
 
