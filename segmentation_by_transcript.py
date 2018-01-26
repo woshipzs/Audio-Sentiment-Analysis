@@ -1,5 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
 from pydub import AudioSegment
 import numpy as np
 import os
@@ -34,6 +32,11 @@ def find_label(filename, label_matrix):
             return row[1]
 
 def segment_one_audio(trans_path, audio_path, seg_loc, label):
+    
+    # trans_path: transcript path
+    # audio_path: audio path
+    # seg_loc: segmented audios folder path
+    # label: the label for this audio
     
     basename = os.path.splitext(os.path.basename(trans_path))[0]
     p = seg_loc + label + '/' + basename
@@ -89,6 +92,12 @@ def segment_one_audio(trans_path, audio_path, seg_loc, label):
         a = a + 1
         
 def segment_all_audios(trans_dir, audio_dir, seg_dir, label_path):
+    
+    # trans_dir: transcripts folder path
+    # audio_dir: audios folder path
+    # seg_dir: segmented audios folder path
+    # label_path: one-hot label matrix for all audio files
+    
     for trans in os.listdir(trans_dir):
         trans_path = os.path.join(trans_dir, trans)
         basename = os.path.splitext(trans)[0]
