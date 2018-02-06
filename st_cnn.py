@@ -28,6 +28,12 @@ audio_dir = 'ringtone removed labeled wav/'
 
 
 def short_term_features(in_path, window_size):
+    
+    # this function calculates short-term features of one audio file
+    #
+    # in_path: input audio file address
+    # window_size: length of the feature matrix
+    
     [Fs, x] = audioBasicIO.readAudioFile(in_path)
     F = audioFeatureExtraction.stFeatureExtraction(x, Fs, 1.0*Fs, 1.0*Fs);
     st = F.transpose()
@@ -87,6 +93,12 @@ def find_label(filename, label_matrix):
     
 def data_generator(label_path,audio_dir,window_size):
     
+    # this function generates short-term feature matrixes
+    #
+    # label_path: ground-truth file address
+    # audio_dir: directory that stores all audio files
+    # window_size: length of the feature matrix
+    
     label_matrix = get_labels(label_path)
     a = 0
     
@@ -123,6 +135,11 @@ def data_generator(label_path,audio_dir,window_size):
     return features, labels
 
 def train_model(dataset, labels):
+    
+    # this function trains a deep neural network by feeding feature matrixes
+    #
+    # dataset: training data address
+    # labels: training label address
     
     X_train, X_test, y_train, y_test = train_test_split(dataset, labels, test_size=0.1, random_state = 227)
     
@@ -199,7 +216,7 @@ def train_model(dataset, labels):
     plt.show()
     
 
-#dataset, labels = data_generator(label_path,audio_dir,window_size)
+dataset, labels = data_generator(label_path,audio_dir,window_size)
 dataset = np.load('cnn_dataset_0.05.dat')
 labels = np.load('cnn_labels_0.05.dat')
 train_model(dataset, labels)

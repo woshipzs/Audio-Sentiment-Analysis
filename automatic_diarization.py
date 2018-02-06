@@ -1,21 +1,21 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Aug 10 14:59:00 2017
-
-@author: zeshan
-"""
 
 from pyAudioAnalysis import audioSegmentation as aS
 from pydub import AudioSegment
 import os
 
+# directory address and folder names are declared here
 working_directory = '/Users/zeshan/Desktop/audial signal sentiment analysis/'
 ringtone_removed_folder = 'ringtone removed labeled wav/'
 diarization_folder = 'diarization/'
 
 def split_call_into_speakers(in_loc, out_loc):
-    
+#   this function split all audio files in a directory into segments by speaker turns using pyAudioAnalysis library
+#
+#   in_loc: directory that contains all audio files
+#   out_loc: directory that stores all diarized segments
+
     for audio in os.listdir(in_loc):
         if audio != '.DS_Store':
             p = os.path.join(in_loc, audio)

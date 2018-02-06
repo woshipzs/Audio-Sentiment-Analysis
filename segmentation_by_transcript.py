@@ -15,6 +15,10 @@ def convert_to_milliseconds(time):
     return int(int(t[0])*3600*1000+int(t[1])*60*1000+float(t[2])*1000)
 
 def get_labels(path):
+#   this function generates one-hot ground-truth matrix
+#
+#   path: ground-truth file address
+
     csvfile = open(path, 'rb')
     reader = csv.reader(csvfile)
     
@@ -32,7 +36,8 @@ def find_label(filename, label_matrix):
             return row[1]
 
 def segment_one_audio(trans_path, audio_path, seg_loc, label):
-    
+    # this function split one audio file by speaker turns based on a transcript
+    #
     # trans_path: transcript path
     # audio_path: audio path
     # seg_loc: segmented audios folder path
@@ -93,6 +98,8 @@ def segment_one_audio(trans_path, audio_path, seg_loc, label):
         
 def segment_all_audios(trans_dir, audio_dir, seg_dir, label_path):
     
+    # this function split all audio files by speaker truns based on transcripts and store them in different folders based on their labels
+    #
     # trans_dir: transcripts folder path
     # audio_dir: audios folder path
     # seg_dir: segmented audios folder path

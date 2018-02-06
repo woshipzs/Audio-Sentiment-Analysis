@@ -1,15 +1,14 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 30 06:05:04 2017
 
-@author: zeshan
-"""
+#   this file generates histogram of audio files durations
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 from pyAudioAnalysis import audioBasicIO
 
+#   path to the audio files
 path = '../ringtone removed labeled wav/'
 
 his = []

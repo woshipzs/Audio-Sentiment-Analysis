@@ -1,15 +1,13 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Sep 20 00:33:51 2017
 
-@author: zeshan
-"""
+
 #generate audio features :
 #   speech rate
 #   # of pauses
 #   decibels
 #   pitch fundamentals - mean, covariance, standard deviation
+
 import subprocess
 import os
 import csv
@@ -32,6 +30,11 @@ min_sounding_duration = 0.5
 min_pitch = 70
 
 def calc_features(in_file,out_file):
+#	this function calculate fundamental features of one segment and store them in the out_file
+#
+#	in_file: the segment file address
+#	out_file: the stored feature address
+
     audio = AudioSegment.from_file(in_file, format='wav')
     if len(audio) < 500:
         return ''
@@ -80,6 +83,11 @@ def calc_features(in_file,out_file):
     
 
 def calc_all_segments(in_path, out_path):
+#	this function calculates features of all segments and store them in a file 
+# 
+#	in_path: directory that stores all segments
+#	out_path: file address that stores segment features
+
     csvfile = open(abs_working_folder+'acoustic_features.csv', 'wb')
     filewriter = csv.writer(csvfile, delimiter=',')
     filewriter.writerow(['Call ID','Time-ordered segment', 'Salesperson\'s speech rate', 'Mean Frequency',

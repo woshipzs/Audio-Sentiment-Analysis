@@ -1,10 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 15 18:58:06 2017
 
-@author: zeshan
-"""
 import subprocess
 import os
 import csv
@@ -24,6 +20,10 @@ epochs = 50
 batch_size = 50
 
 def get_labels(path):
+#   this function generates one-hot ground-truth matrix
+#
+#   path: ground-truth file address
+
     csvfile = open(path, 'rb')
     reader = csv.reader(csvfile)
     
@@ -36,6 +36,11 @@ def get_labels(path):
     return np.array(rows)
 
 def generate_opensmile_features(in_dir, out_dir, gt_csv):
+#   this function generates features of audio files using opensmile library
+#
+#   in_dir: directory that stores all audio files
+#   out_dir: directory that stores the result file
+#   gt_csv: ground-truth csv file address
 
     negcsv = 'negfeatures.csv'
     poscsv = 'posfeatures.csv'
@@ -75,6 +80,10 @@ def generate_opensmile_features(in_dir, out_dir, gt_csv):
     combined_features.to_csv(os.path.join(out_dir, 'opensmile_fc.csv'), index=False, header=None)
     
 def train_model(fc_loc):
+#   three-layer neural network for trainning features from opensmile
+#
+#   fc_loc: directory that stores ground-truth file
+
     opensmile_fc = pd.read_csv(os.path.join(fc_loc, 'opensmile_fc.csv'), header=None)
     #ids = opensmile_fc.iloc[:, 0].values
     labels = opensmile_fc.iloc[:, -1].values
@@ -98,5 +107,5 @@ def train_model(fc_loc):
               batch_size=batch_size,
               validation_data=(validation_data, validation_labels))
 
-#opensmile_fc = generate_opensmile_features(in_dir,out_dir,gt_csv)
+opensmile_fc = generate_opensmile_features(in_dir,out_dir,gt_csv)
 train_model(out_dir)
